@@ -41,7 +41,7 @@ def fetch_all_tables_centos():
             dbname='postgres',
             user='postgres',
             password='example',
-            host='localhost'
+            host='52.23.248.189'
         )
         
         cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
