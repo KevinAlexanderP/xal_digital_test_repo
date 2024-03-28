@@ -54,26 +54,29 @@ def validate_state(state):
 def create_company(company_name, address, city, state, zip_code):
     if not validate_state(state):
         return {"error": "Invalid state. It must be a 2-letter code and only contain letters."}
-    
+
     try:
         connection = psycopg2.connect(**centos_db_config)
         cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        
-        # Parameterized queries are used to avoid SQL injection
+
         query = """
         INSERT INTO Company (company_name, address, city, state, zip)
         VALUES (%s, %s, %s, %s, %s)
         RETURNING company_id;
         """
         cursor.execute(query, (company_name, address, city, state, zip_code))
-        
-        # Fetch the returned company_id of the newly created company
+
         company_id = cursor.fetchone()[0]
         connection.commit()
-        
         cursor.close()
         connection.close()
         return {"company_id": company_id}
+
+    except psycopg2.IntegrityError as e:
+        if "company_pkey" in str(e):
+            return {"error": "Company with the provided company_id already exists."}
+        else:
+            return {"error": str(e)}
     except psycopg2.Error as e:
         return {"error": str(e)}
 
