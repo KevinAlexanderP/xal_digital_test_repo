@@ -14,20 +14,22 @@ def get_data_centos():
     return jsonify(data)
 
 @app.route('/create_company', methods=['POST'])
-def create_new_company():
-    # Parse data from request
-    payload = request.json
-    # Validate and sanitize input as needed before passing to the database function
-    if not all(key in payload for key in ['company_name', 'address', 'city', 'state', 'zip_code']):
+def add_company():
+    # Extract data from the request
+    data = request.get_json()
+    
+    # Validate incoming JSON payload
+    if not all(key in data for key in ['company_name', 'address', 'city', 'state', 'zip_code']):
         return jsonify({"error": "Missing required company information"}), 400
     
-    # Use the unpacking operator ** to pass the dictionary as keyword arguments
-    response = create_company(**payload)
+    # Call the create_company function with the data
+    result = create_company(data['company_name'], data['address'], data['city'], data['state'], data['zip_code'])
     
-    if "error" in response:
-        # You could further customize the response based on the specific error
-        return jsonify(response), 500
-    return jsonify(response), 201
+    # Check for errors from the database operation
+    if "error" in result:
+        return jsonify({"error": result["error"]}), 500
+    
+    return jsonify({"message": "Company created successfully", "company_id": result["company_id"]}), 201
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
