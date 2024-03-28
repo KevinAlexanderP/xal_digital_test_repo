@@ -1,0 +1,2 @@
+ALTER TABLE public.company
+ALTER COLUMN zip TYPE VARCHAR(10);

@@ -1,0 +1,212 @@
+{
+	"info": {
+		"_postman_id": "3ff2d6bf-82b1-4a59-9ea5-5fbebeacb4f2",
+		"name": "API_XAL_TEST_Collection_CRUD_ops",
+		"description": "API de Gestión de Empresas, Departamentos y Empleados\n\nEsta colección de Postman contiene endpoints de API para gestionar empresas, departamentos y empleados. La API te permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en estas entidades.\n\nEndpoints:\n\nEmpresas:\n\n- GET /companies/{company_id}: Recupera una empresa por su ID.\n    \n- POST /companies: Crea una nueva empresa.\n    \n- PUT /companies/{company_id}: Actualiza una empresa existente.\n    \n- DELETE /companies/{company_id}: Elimina una empresa.\n    \n\nDepartamentos:\n\n- GET /departments/{department_id}: Recupera un departamento por su ID.\n    \n- POST /departments: Crea un nuevo departamento.\n    \n- PUT /departments/{department_id}: Actualiza un departamento existente.\n    \n- DELETE /departments/{department_id}: Elimina un departamento.\n    \n\nEmpleados:\n\n- GET /employees/{employee_id}: Recupera un empleado por su ID.\n    \n- POST /employees: Crea un nuevo empleado.\n    \n- PUT /employees/{employee_id}: Actualiza un empleado existente.\n    \n- DELETE /employees/{employee_id}: Elimina un empleado.\n    \n\nEndpoints Adicionales:\n\n- GET /data: Recupera los datos de todas las tablas.\n    \n- GET /data_centos: Recupera los datos de todas las tablas desde un servidor CentOS.\n    \n\nLa API acepta y devuelve datos en formato JSON. Al crear o actualizar entidades, los campos requeridos se validan para garantizar la integridad de los datos.\n\nUtiliza esta colección de Postman para probar e interactuar con los endpoints de la API. Puedes crear, recuperar, actualizar y eliminar empresas, departamentos y empleados utilizando las solicitudes proporcionadas.\n\nNota: Asegúrate de actualizar la URL base en el entorno de Postman para que coincida con la URL y el puerto de tu servidor.\n\nContacta al equipo de desarrollo de la API para cualquier asistencia adicional o preguntas.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30546121"
+	},
+	"item": [
+		{
+			"name": "CREATE department",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"department_name\": \"Sales\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/departments/8"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"company_name\": \"Tech Innovations Inc.\",\n  \"address\": \"456 Innovation Drive\",\n  \"city\": \"Techville\",\n  \"state\": \"CA\",\n  \"zip_code\": \"94000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/companies"
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE employee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone1\": \"123-456-7890\",\n  \"phone2\": \"987-654-3210\",\n  \"email\": \"johndoe@example.com\",\n  \"company_id\": 1,\n  \"department_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/employees"
+			},
+			"response": []
+		},
+		{
+			"name": "READ department",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://52.23.248.189:5000/departments/8"
+			},
+			"response": []
+		},
+		{
+			"name": "READ company",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://52.23.248.189:5000/companies/8"
+			},
+			"response": []
+		},
+		{
+			"name": "READ  employee",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/employees/107"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE employee",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"phone1\": \"123-456-7890\",\n  \"phone2\": \"987-654-3210\",\n  \"email\": \"johndoe@example.com\",\n  \"company_id\": 1,\n  \"department_id\": 2\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/employees/107"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE department",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"department_name\": \"Sales\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/departments/8"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE company",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"company_name\": \"Tech Innovations Inc.\",\n  \"address\": \"456 Innovation Drive\",\n  \"city\": \"Techville\",\n  \"state\": \"CA\",\n  \"zip_code\": \"94000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/companies"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE  department",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/departments/8"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE  company",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/companies/8"
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE  employee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://52.23.248.189:5000/employees/107"
+			},
+			"response": []
+		}
+	]
+}

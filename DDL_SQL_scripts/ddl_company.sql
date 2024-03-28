@@ -1,9 +1,15 @@
--- Creating the Company Table
-CREATE TABLE Company (
-    company_id INT AUTO_INCREMENT PRIMARY KEY,
-    company_name VARCHAR(255) NOT NULL,
-    address VARCHAR(255) NOT NULL,
-    city VARCHAR(100) NOT NULL,
-    state CHAR(2) NOT NULL,
-    zip CHAR(5) NOT NULL
+-- public.company definition
+
+-- Drop table
+
+-- DROP TABLE public.company;
+
+CREATE TABLE public.company (
+	company_id serial4 NOT NULL,
+	company_name varchar(255) NOT NULL,
+	address varchar(255) NOT NULL,
+	city varchar(100) NOT NULL,
+	state bpchar(2) NOT NULL,
+	zip bpchar(5) NOT NULL,
+	CONSTRAINT company_pkey PRIMARY KEY (company_id)
 );
