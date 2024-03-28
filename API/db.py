@@ -47,3 +47,36 @@ def fetch_all_tables_centos():
         return all_tables_data
     except psycopg2.Error as e:
         return {"error": str(e)}
+    
+def validate_state(state):
+    return len(state) == 2 and state.isalpha()
+
+def create_company(company_name, address, city, state, zip_code):
+    if not validate_state(state):
+        return {"error": "Invalid state. It must be a 2-letter code and only contain letters."}
+    
+    try:
+        connection = psycopg2.connect(**centos_db_config)
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        
+        # Parameterized queries are used to avoid SQL injection
+        query = """
+        INSERT INTO Company (company_name, address, city, state, zip)
+        VALUES (%s, %s, %s, %s, %s)
+        RETURNING company_id;
+        """
+        cursor.execute(query, (company_name, address, city, state, zip_code))
+        
+        # Fetch the returned company_id of the newly created company
+        company_id = cursor.fetchone()[0]
+        connection.commit()
+        
+        cursor.close()
+        connection.close()
+        return {"company_id": company_id}
+    except psycopg2.Error as e:
+        return {"error": str(e)}
+
+# Example usage
+# response = create_company('Example Inc.', '123 Example St', 'Exampletown', 'EX', '12345')
+# print(response)
