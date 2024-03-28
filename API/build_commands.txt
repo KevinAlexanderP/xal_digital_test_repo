@@ -1,0 +1,3 @@
+1. cd API
+2. docker build -t api_image .
+3.docker run -p 5000:5000 myimage , this apply for local development
